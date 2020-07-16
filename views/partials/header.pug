@@ -1,21 +1,31 @@
 header.header
-    .header__column
+    .header__column.home-button
         a(href=routes.home)
             i.fab.fa-youtube
-    .header__column
+            span #{siteName}
+    .header__column.search-box
         form(action=routes.search, method="get")
             input(type="text", placeholder="Search by term..", name="term")
     .header__column
-        ul
-            if !user.isAuthenticated
+        ul.header__user
+            if !loggedUser
                 li
                     a(href=routes.join) Join
                 li
                     a(href=routes.login) Log In
             else
                 li
-                    a(href=`/videos/${routes.upload}`) Upload
+                    if loggedUser.avatarUrl
+                        img(src=`http://localhost:4000/${loggedUser.avatarUrl}`) 
+                    else 
+                        img(src="/uploads/avatar/default.png")
+                    span #{loggedUser.name}
                 li
-                    a(href=routes.userDetail(user.id)) Profile            
+                    i.fas.fa-angle-right
+                    a(href=`/videos${routes.upload}`) Upload
                 li
+                    i.fas.fa-angle-right
+                    a(href=routes.me) Profile            
+                li
+                    i.fas.fa-angle-right
                     a(href=routes.logout) Log Out

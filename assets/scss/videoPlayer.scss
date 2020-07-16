@@ -1,0 +1,124 @@
+.videoPlayer {
+  position: relative;
+  &:hover {
+    .videoPlayer__controls {
+      opacity: 1;
+    }
+  }
+  video {
+    width: 80%;
+    margin-top: 10px;
+  }
+  .videoPlayer__controls {
+    opacity: 0;
+    transition: opacity 0.4s linear;
+    position: absolute;
+    bottom: 20px;
+    width: 80%;
+    z-index: 9;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    .videoPlayer__controls-innerbox {
+      color: white;
+      padding: 10px;
+      background-color: rgba(0, 0, 0, 0.2);
+      border-radius: 20px;
+      width: 75%;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      #jsProgress {
+        width: 100%;
+      }
+      .videoPlayer__column:last-child {
+        justify-self: end;
+        margin-right: 5px;
+        display: flex;
+        align-items: center;
+        .videoPlayer__subcolumn:first-child {
+          width: 30px;
+        }
+        .videoPlayer__subcolumn:nth-child(2) {
+          display: flex;
+          align-items: center;
+        }
+        #jsVolumeBtn {
+          margin-right: 5px;
+        }
+        #jsVolume {
+          all: unset;
+          background-color: white;
+          height: 3px;
+          margin-right: 10px;
+          border-radius: 3px;
+          width: 50px;
+        }
+        #jsFullScreenBtn {
+          margin-left: 10px;
+        }
+      }
+      .videoPlayer__column:first-child {
+        display: flex;
+        align-items: center;
+        margin-left: 5px;
+        #jsPlayBtn {
+          margin-right: 15px;
+        }
+      }
+      i {
+        font-size: 20px;
+
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.videoPlayer:fullscreen {
+  video {
+    max-width: 100%;
+    width: 100%;
+  }
+  .videoPlayer__controls {
+    width: 100%;
+    .videoPlayer__controls-innerbox {
+      width: 80%;
+    }
+  }
+}
+
+.record-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0px;
+  border-radius: 10px;
+
+  border: solid 1px grey;
+  padding: 20px;
+  video {
+    background-color: black;
+    width: 320px;
+    height: 180px;
+  }
+  #jsRecordBtn {
+    all: unset;
+    padding: 7px 10px;
+    border-radius: 5px;
+    width: 300px;
+    margin-top: 10px;
+    text-align: center;
+    background-color: red;
+    color: white;
+    font-weight: 600;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+  }
+}
+.video__upload {
+  border: solid 1px grey;
+  padding: 20px;
+  padding-bottom: 0px;
+  border-radius: 10px;
+}

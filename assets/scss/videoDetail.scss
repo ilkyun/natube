@@ -1,0 +1,48 @@
+.video__info {
+  margin: 20px;
+  margin-top: 0px;
+  width: 80%;
+  .video__title {
+    font-size: 40px;
+    font-weight: 700;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    #editVideo {
+      border-radius: 5px;
+      padding: 5px 10px;
+      font-size: 10px;
+      color: $white;
+      margin-left: 15px;
+      background-color: skyblue;
+    }
+  }
+  .video__creator {
+    margin-bottom: 30px;
+    margin-top: 10px;
+    opacity: 0.5;
+    a {
+      color: black;
+    }
+  }
+  .video__views {
+    margin-top: 20px;
+  }
+  p {
+    font-size: 18px;
+    margin-bottom: 50px;
+  }
+}
+hr {
+  margin-left: 10px;
+  width: 85%;
+  border: solid 1px rgb(219, 219, 219);
+}
+.video__comments {
+  width: 80%;
+  margin: 20px;
+  .video__comment-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 15px 0px;
+  }
+}

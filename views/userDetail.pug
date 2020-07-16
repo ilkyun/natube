@@ -1,4 +1,37 @@
 extends layouts/main
+include mixins/videoBlock
 
 block content
-    p User Detail
+    .user-profile
+        .user-profile__header
+            .user-profile__column
+                if user.avatarUrl
+                    img.avatar(src=`http://localhost:4000/${user.avatarUrl}`)
+                else
+                    img.avatar(src="/uploads/avatar/default.png")
+                .profile__subheader
+                    .profile__username=user.name
+                    .profile__email=user.email
+            .user-profile__column
+                if loggedUser
+                    if user.id === loggedUser.id
+                        a.editUser__link(href=routes.editProfile(user.id)) 
+                            span Edit profile
+                        a.editUser__link(href=routes.changePassword(user.id))
+                            span Change Password
+        .user-profile__upload
+            .user-profile__upload-title
+                span #{videos.length} uploaded Videos with total #{totalViews} views and #{totalLikes} likes
+            .user-profile__upload-video
+                each video in videos
+                    +videoBlock({
+                        id:video.id,
+                        title:video.title,
+                        views:video.views,
+                        videoFile:video.fileUrl,
+                        date:video.createdAt,
+                        creator:video.creator,
+                        comments: video.comments,
+                        likes: video.likes
+                    })
+

@@ -1,6 +1,15 @@
+include videoPlayer
+
 mixin videoBlock(video = {})
     .videoBlock
         video.videoBlock__thumbnail(src=video.videoFile, controls=true)
         a(href=routes.videoDetail(video.id))
-            h4.videoBlock__title=video.title
-            h6.videoBlock__views=video.views
+            .videoBlock__title=video.title
+            .videoBlock__creator Uploaded by #{video.creator.name}
+            .videoBlock__date=video.date
+            .videoBlock__views #{video.views} Views  |  #{video.likes} Likes
+            .videoBlock__comments
+                if video.comments.length === 1
+                    span.video__comment-number 1 comment
+                else
+                    span.video__comment-number #{video.comments.length} comments

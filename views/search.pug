@@ -3,8 +3,15 @@ include mixins/videoBlock
 
 block content
     .search__header
-        h3 Searching for: #{searchingBy}
-    .search__videos
+        .search__header-innerbox
+            h3 Searching for: #{searchingBy} 
+            .search__result 
+                if videos.length === 1
+                    span #{videos.length} result
+                else
+                    span #{videos.length} results
+        hr
+    .videos
         if videos.length === 0
             h5 No Videos Found
         each video in videos
@@ -12,5 +19,8 @@ block content
                 title:video.title,
                 views:video.views,
                 videoFile:video.fileUrl,
-                id:video.id
+                id:video.id,
+                date:video.createdAt,
+                creator:video.creator,
+                comments:video.comments
             })
