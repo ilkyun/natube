@@ -30,6 +30,13 @@ const GITHUB_CALLBACK = "/auth/github/callback";
 const FACEBOOK = "/auth/facebook";
 const FACEBOOK_CALLBACK = "/auth/facebook/callback";
 
+// API
+const API = "/api";
+const REGISTER_VIEW = "/:id/view";
+const REGISTER_LIKE = "/:id/like";
+const ADD_COMMENT = "/:id/comment";
+const DELETE_COMMENT = "/:id/deleteComment";
+
 const routes = {
   home: HOME,
   hotVideo: HOT_VIDEO,
@@ -88,6 +95,11 @@ const routes = {
   githubCallback: GITHUB_CALLBACK,
   facebook: FACEBOOK,
   facebookCallback: FACEBOOK_CALLBACK,
+  api: API,
+  registerView: REGISTER_VIEW,
+  registerLike: REGISTER_LIKE,
+  addComment: ADD_COMMENT,
+  deleteComment: DELETE_COMMENT,
 };
 
 export default routes;

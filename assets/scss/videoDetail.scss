@@ -22,10 +22,27 @@
     opacity: 0.5;
     a {
       color: black;
+      text-decoration: underline;
     }
   }
   .video__views {
     margin-top: 20px;
+    display: flex;
+    .view__buttons {
+      width: 70px;
+      padding: 3px;
+      border-radius: 5px;
+      color: white;
+      text-align: center;
+      margin-right: 10px;
+    }
+    .view__buttons:first-child {
+      background-color: grey;
+    }
+    .view__buttons:nth-child(2) {
+      background-color: $themeColor1;
+      cursor: pointer;
+    }
   }
   p {
     font-size: 18px;
@@ -44,5 +61,38 @@ hr {
     font-size: 20px;
     font-weight: 600;
     margin: 15px 0px;
+  }
+  .add__comment {
+    margin-left: 10px;
+    input {
+      width: 200px;
+      padding: 5px 10px;
+    }
+  }
+  .video__comments-list {
+    margin-top: 20px;
+    li {
+      display: flex;
+      align-items: center;
+      margin: 10px 10px;
+      .comment-text {
+        font-size: 18px;
+        margin-right: 10px;
+      }
+      .comment-creator {
+        font-size: 14px;
+        opacity: 0.5;
+      }
+      .comment-delete {
+        margin-left: 5px;
+        button {
+          all: unset;
+          width: 10px;
+          height: 10px;
+          font-size: 5px;
+          cursor: pointer;
+        }
+      }
+    }
   }
 }

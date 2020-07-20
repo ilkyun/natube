@@ -19,7 +19,7 @@ header.header
                         img(src=`http://localhost:4000/${loggedUser.avatarUrl}`) 
                     else 
                         img(src="/uploads/avatar/default.png")
-                    span #{loggedUser.name}
+                    span#jsLoggedUserName #{loggedUser.name}
                 li
                     i.fas.fa-angle-right
                     a(href=`/videos${routes.upload}`) Upload

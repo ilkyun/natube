@@ -1,5 +1,6 @@
 import routes from "../routes";
 import Video from "../models/Video";
+import Comment from "../models/Comment";
 
 export const home = async (req, res) => {
   try {
@@ -12,7 +13,7 @@ export const home = async (req, res) => {
 };
 export const hotVideo = async (req, res) => {
   try {
-    const videos = await Video.find({ views: { $gte: 0 } }).populate("creator");
+    const videos = await Video.find({ likes: { $gte: 3 } }).populate("creator");
     res.render("hotVideo", { pageTitle: "Hot Videos", videos });
   } catch (error) {
     console.log(error);
@@ -55,14 +56,24 @@ export const postUpload = async (req, res) => {
 };
 
 export const videoDetail = async (req, res) => {
+  // const commentDelete = document.getElementById("jsCommentDelete");
   const {
     params: { id },
   } = req;
+  let getCommentId = [];
   try {
-    const video = await Video.findById(id).populate("creator");
-    console.log(video);
-    res.render("videoDetail", { pageTitle: video.title, video });
+    const video = await Video.findById(id)
+      .populate("creator")
+      .populate("comments");
+    video.comments.forEach((item) => {
+      getCommentId.push(item.id);
+    });
+    const comments = await Comment.find({ _id: getCommentId })
+      .populate("creator")
+      .sort({ _id: -1 });
+    res.render("videoDetail", { pageTitle: video.title, video, comments });
   } catch (error) {
+    console.log(error);
     res.redirect(routes.home);
   }
 };
@@ -72,12 +83,13 @@ export const getEditVideo = async (req, res) => {
   } = req;
   try {
     const video = await Video.findById(id);
-    if (video.creator !== req.user.id) {
+    if (video.creator != req.user.id) {
       throw Error();
     } else {
       res.render("editVideo", { pageTitle: `Edit ${video.title}`, video });
     }
   } catch (error) {
+    console.log(error);
     res.redirect(routes.home);
   }
 };
@@ -111,4 +123,77 @@ export const deleteVideo = async (req, res) => {
     console.log(error);
   }
   res.redirect(routes.home);
+};
+
+// Register views and likes
+export const registerView = async (req, res) => {
+  try {
+    const {
+      params: { id },
+    } = req;
+    const video = await Video.findById(id);
+    video.views += 1;
+    video.save();
+    res.status(200);
+  } catch (error) {
+    res.statusCode(400);
+  } finally {
+    res.end();
+  }
+};
+
+export const registerLike = async (req, res) => {
+  try {
+    const {
+      params: { id },
+    } = req;
+    const video = await Video.findById(id);
+    video.likes += 1;
+    video.save();
+    res.status(200);
+  } catch (error) {
+    res.status(400);
+  } finally {
+    res.end();
+  }
+};
+
+// Add Comment
+
+export const postAddComment = async (req, res) => {
+  const {
+    params: { id },
+    body: { comment },
+    user,
+  } = req;
+  try {
+    const video = await Video.findById(id);
+    // const creator = await Video.findById(user.id);
+    const newComment = await Comment.create({
+      text: comment,
+      creator: user.id,
+    });
+    video.comments.push(newComment.id);
+    video.save();
+    // creator.comments.push(newComment.id);
+    // creator.save();
+  } catch (error) {
+    console.log(error);
+    res.status(400);
+  } finally {
+    res.end();
+  }
+};
+export const postDeleteComment = async (req, res) => {
+  const {
+    body: { commentId },
+  } = req;
+  try {
+    await Comment.findByIdAndRemove(commentId);
+  } catch (error) {
+    console.log(error);
+    res.status(400);
+  } finally {
+    res.end();
+  }
 };

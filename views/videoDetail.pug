@@ -17,11 +17,29 @@ block content
                 a(href=routes.userDetail(video.creator.id))=video.creator.name
                 span  @ #{video.createdAt}
             p.video__description=video.description
-            .video__views #{video.views} Views  |  #{video.likes} Likes
+            .video__views 
+                div.view__buttons #{video.views} Views
+                div.view__buttons#jsLikeButton 
+                    span#jsLikeNumber #{video.likes}
+                    span  Likes
         hr(align="left")
         .video__comments
             .video__comment-title Comments (
-                if video.comments.length === 1
-                    span.video__comment-number 1)
-                else
-                    span.video__comment-number #{video.comments.length})
+                span.video__comment-number
+                    span#jsCommentNumber=video.comments.length
+                    span )
+            form.add__comment#jsAddComment
+                input(type="text", placeholder="Add a comment")            
+            ul.video__comments-list#jsCommentList
+                each comment in comments
+                    li(id=comment.id)
+                        .comment-text=comment.text
+                        .comment-creator 
+                            span from 
+                            if comment.creator
+                                span #{comment.creator.name}
+                            else
+                                span Anonymous
+                        if loggedUser && comment.creator && comment.creator.id === loggedUser.id
+                            .comment-delete(id=comment.id)
+                                button#jsCommentDelete ❌
