@@ -1,3 +1,5 @@
+import getBlobDuration from "get-blob-duration";
+
 const videoContainer = document.getElementById("jsVideoPlayer");
 let videoPlayer;
 if (videoContainer) {
@@ -104,8 +106,10 @@ function calProgress() {
   progress.value = `${(videoPlayer.currentTime / videoPlayer.duration) * 100}`;
 }
 
-function setTotalTime() {
-  const totalTimeString = formatDate(videoPlayer.duration);
+async function setTotalTime() {
+  const blob = await fetch(videoPlayer.src).then((response) => response.blob);
+  const duration = await getBlobDuration(blob);
+  const totalTimeString = formatDate(duration);
   totalTime.innerHTML = totalTimeString;
   setInterval(getCurrentTime, 1000);
   setInterval(calProgress, 10);

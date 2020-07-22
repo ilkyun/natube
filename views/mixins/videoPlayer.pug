@@ -1,6 +1,6 @@
 mixin videoPlayer(video={})
     .videoPlayer#jsVideoPlayer
-        video#jsVideo(src=`/${video.src}`)
+        video#jsVideo(src=video.src)
         .videoPlayer__controls
             .videoPlayer__controls-innerbox
                 .videoPlayer__column
