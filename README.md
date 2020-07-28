@@ -1,5 +1,9 @@
 # WeTube
 
+This is a result of the course of "Youtube Cloning" of Nomadcoders(https://nomadcoders.co)
+
+Deployed on heroku: https://rocky-peak-61422.herokuapp.com/
+
 ## Used libraries and packages
 
 - Express: App and routes
