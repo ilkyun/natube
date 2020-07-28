@@ -1,4 +1,4 @@
-# WeTube
+# NATube
 
 This is a result of the course of "Youtube Cloning" of Nomadcoders(https://nomadcoders.co)
 
