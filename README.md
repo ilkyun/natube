@@ -24,5 +24,5 @@
 
 ## Make Things Prettier:
 
-- [ ] View and Like Button
-- [ ] Comments
+- [x] View and Like Button
+- [x] Comments
